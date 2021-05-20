@@ -77,7 +77,7 @@
     <div id="fileUD">
         <input type="file" multiple="multiple" onchange="loadFile(this);" class="WButton"><br>
         <button onclick="loadFile();" class="WButton">重載圖檔</button><br>
-        <button onclick="downloadImage();" class="WButton">下載圖檔</button>
+        <btns class="WButton"><button onclick="downloadJImage();">下載jpg</button><button onclick="downloadPImage();">下載png</button></btns>
         <a id="downloadA"></a>
     </div>
     <div id="imgBtn">
@@ -166,14 +166,9 @@
         }
         function deleteBackground(){
             pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
-            pixis2 = ctx2.getImageData(0, 0, cvs2.width, cvs2.height);
             data = pixis.data;
-            data2 = pixis2.data;
-            if (data.length > data2.length){var dataS = data2.length}
-            else if (data.length < data2.length){var dataS = data.length}
-            else {var dataS = (data.length+data2.length)/2}
-            for(i = 0; i < dataS; i += 4){
-                if (data[i] == data2[i] && data[i+1] == data2[i+1] && data[i+2] == data2[i+2] && data[i+3] == data2[i+3]){
+            for(i = 0; i < data.length; i += 4){
+                if (data[i] == 0){
                     data[i] = 0;
                     data[i+1] = 0;
                     data[i+2] = 0;
@@ -204,17 +199,24 @@
             var src2 = URL.createObjectURL(file2);
             var img2 = new Image();
             img2.src = src2;
-            img.onload = function(){
+            img2.onload = function(){
                 cvs2.width = img2.width;
                 cvs2.height = img2.height;
                 ctx2.drawImage(img2, 0, 0, cvs2.width, cvs2.height);
             };
         }
-        function downloadImage(){
+        function downloadJImage(){
             var link = document.querySelector('#downloadA');
             var file = document.querySelector('input[type=file]').files[0].name;
             link.download = file+".jpg";
             link.href = cvs.toDataURL('image/jpeg');
+            link.click();
+        }
+        function downloadPImage(){
+            var link = document.querySelector('#downloadA');
+            var file = document.querySelector('input[type=file]').files[0].name;
+            link.download = file+".jpg";
+            link.href = cvs.toDataURL('image/png');
             link.click();
         }
     </script>
