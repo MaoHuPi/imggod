@@ -215,7 +215,7 @@
         function downloadPImage(){
             var link = document.querySelector('#downloadA');
             var file = document.querySelector('input[type=file]').files[0].name;
-            link.download = file+".jpg";
+            link.download = file+".png";
             link.href = cvs.toDataURL('image/png');
             link.click();
         }
