@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>ImgGod-相片濾鏡處理器</title>
+    <style>
+        * {
+            user-select: none;
+            outline: none;
+        }
+        html,body {
+            height: 100%;
+            margin: 0px;
+        }
+        #workSpace {
+            width: 60vw;
+            height:35vw;
+            background-color: black;
+            top: 1vw;
+            left: 1vw;
+            position: fixed;
+            box-sizing: border-box;
+        }
+        #img_canvas {
+            position: relative;
+        }
+        #fileUD {
+            width: 60vw;
+            height:100.5px;
+            background-color: black;
+            top: 37vw;
+            left: 1vw;
+            position: fixed;
+            padding: 3.14px;
+            box-sizing: border-box;
+        }
+        #imgBtn {
+            width: 37vw;
+            height:36vw;
+            background-color: black;
+            top: 1vw;
+            left: 62vw;
+            position: fixed;
+            padding: 3.14px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .WButton {
+            margin: 3.14px;
+            width: 100%;
+            height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="How"></div> -->
+    <div id="workSpace">
+        <canvas id="img_canvas"></canvas>
+    </div>
+    <div id="fileUD">
+        <input type="file" onchange="loadFile(this);" class="WButton" style="color: #ffffff;"><br>
+        <button onclick="loadFile();" class="WButton">重載圖檔</button><br>
+        <button onclick="downloadImage();" class="WButton">下載圖檔</button>
+        <a id="downloadA"></a>
+    </div>
+    <div id="imgBtn">
+        <button class="WButton" onclick="invertColor()">顏色反向</button>
+        <button class="WButton" onclick="extremeRGB()">極端五色</button>
+        <button class="WButton" onclick="allR()">全部紅色</button>
+        <button class="WButton" onclick="allG()">全部綠色</button>
+        <button class="WButton" onclick="allB()">全部藍色</button>
+    </div>
+    <script>
+        const cvs = document.querySelector('#img_canvas');
+        const ctx = cvs.getContext('2d');
+        const wsp = document.querySelector('#workSpace');
+        document.body.onload = function(){
+            var WBtns = document.getElementsByClassName('WButton');
+            for (i=0;i<WBtns.length;i++){
+                var WBtn = WBtns[i];
+                WBtn.style.width = WBtn.offsetWidth-3.14*2+"px";
+            }
+            var imgBtn = document.querySelector('#imgBtn');
+            imgBtn.style.height = imgBtn.offsetHeight+100.5+"px";
+        }
+        function invertColor(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i] = 255 - data[i];
+                data[i+1] = 255 - data[i+1];
+                data[i+2] = 255 - data[i+2];
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function allR(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i] = (data[i]+data[i+1]+data[i+2])/3;
+                data[i+1] = 0;
+                data[i+2] = 0;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function allG(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i] = 0;
+                data[i+1] = (data[i]+data[i+1]+data[i+2])/3;
+                data[i+2] = 0;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function allB(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i] = 0;
+                data[i+1] = 0;
+                data[i+2] = (data[i]+data[i+1]+data[i+2])/3;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function extremeRGB(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                if (data[i]>data[i+1] && data[i]>data[i+2]){
+                    data[i] = 255;data[i+1] = 0;data[i+2] = 0;
+                }
+                else if (data[i+1]>data[i] && data[i+1]>data[i+2]){
+                    data[i] = 0;data[i+1] = 255;data[i+2] = 0;
+                }
+                else if (data[i+2]>data[i] && data[i+2]>data[i+1]){
+                    data[i] = 0;data[i+1] = 0;data[i+2] = 255;
+                }
+                else if (data[i] == data[i+1] && data[i+1] == data[i+2] && data[i] >= 112.5){
+                    data[i] = 255;data[i+1] = 255;data[i+2] = 255;
+                }
+                else if (data[i] == data[i+1] && data[i+1] == data[i+2] && data[i] < 112.5){
+                    data[i] = 0;data[i+1] = 0;data[i+2] = 0;
+                }
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function loadFile(input = document.querySelector('input[type=file]')){
+            var file = input.files[0];
+            var src = URL.createObjectURL(file);
+            var img = new Image();
+            img.src = src;
+            img.onload = function(){
+                cvs.width = img.width;
+                cvs.height = img.height;
+                if (img.width / wsp.style.width > img.height / wsp.style.height){
+                    cvs.style.width = wsp.offsetWidth+"px";
+                }
+                else{
+                    cvs.style.height = wsp.offsetHeight+"px";
+                }
+                cvs.style.top = (wsp.offsetHeight-cvs.offsetHeight)/2+"px";
+                cvs.style.left = (wsp.offsetWidth-cvs.offsetWidth)/2+"px";
+                cvs.style.width
+                ctx.drawImage(img, 0, 0, cvs.width, cvs.height);
+            };
+        }
+        function downloadImage(){
+            var link = document.querySelector('#downloadA');
+            var file = document.querySelector('input[type=file]').files[0].name;
+            link.download = file+".jpg";
+            link.href = cvs.toDataURL('image/jpeg');
+            link.click();
+        }
+    </script>
+</body>
+</html>
