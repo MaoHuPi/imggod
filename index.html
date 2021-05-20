@@ -55,9 +55,11 @@
             width: 100%;
             height: 25px;
             border-radius: 12.5px;
+            color: black;
             background-color: white;
         }
         .WButton:hover {
+            color: white;
             background-color: grey;
         }
     </style>
@@ -68,7 +70,7 @@
         <canvas id="img_canvas"></canvas>
     </div>
     <div id="fileUD">
-        <input type="file" onchange="loadFile(this);" class="WButton" style="color: #ffffff;"><br>
+        <input type="file" onchange="loadFile(this);" class="WButton"><br>
         <button onclick="loadFile();" class="WButton">重載圖檔</button><br>
         <button onclick="downloadImage();" class="WButton">下載圖檔</button>
         <a id="downloadA"></a>
