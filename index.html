@@ -66,6 +66,16 @@
             color: white;
             background-color: grey;
         }
+        #DIBtns {
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+        #DJBtn {
+            grid-area: 1/1/2/2;
+        }
+        #DPBtn {
+            grid-area: 1/2/2/3;
+        }
     </style>
 </head>
 <body>
@@ -77,7 +87,7 @@
     <div id="fileUD">
         <input type="file" multiple="multiple" onchange="loadFile(this);" class="WButton"><br>
         <button onclick="loadFile();" class="WButton">重載圖檔</button><br>
-        <btns class="WButton"><button onclick="downloadJImage();">下載jpg</button><button onclick="downloadPImage();">下載png</button></btns>
+        <btns class="WButton" id="DIBtns"><button onclick="downloadJImage();" id="DJBtn">下載jpg</button><button onclick="downloadPImage();" id="DPBtn">下載png</button></btns>
         <a id="downloadA"></a>
     </div>
     <div id="imgBtn">
