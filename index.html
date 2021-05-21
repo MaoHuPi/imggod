@@ -124,7 +124,10 @@
         <button class="WButton" onclick="allB()">全部藍色</button>
         <button class="WButton" onclick="allBToW()">灰階處理</button>
         <button class="WButton" onclick="allBToW2()">灰階處理2</button>
-
+        <button class="WButton" onclick="turnLight()">圖片調亮</button>
+        <button class="WButton" onclick="turnDark()">圖片調暗</button>
+        <button class="WButton" onclick="turnLight2()">圖片調亮2</button>
+        <button class="WButton" onclick="turnDark2()">圖片調暗2</button>
     </div>
     <script>
         const cvs = document.querySelector('#img_canvas');
@@ -211,6 +214,46 @@
                 data[i] = rgbE;
                 data[i+1] = rgbE;
                 data[i+2] = rgbE;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function turnLight(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i] = data[i]+10;
+                data[i+1] = data[i+1]+10;
+                data[i+2] = data[i+2]+10;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function turnLight2(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i] = data[i]*1.1;
+                data[i+1] = data[i+1]*1.1;
+                data[i+2] = data[i+2]*1.1;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function turnDark(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i] = data[i]-10;
+                data[i+1] = data[i+1]-10;
+                data[i+2] = data[i+2]-10;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function turnDark2(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i] = data[i]/1,1;
+                data[i+1] = data[i+1]/1.1;
+                data[i+2] = data[i+2]/1.1;
             }
             ctx.putImageData(pixis, 0, 0);
         }
