@@ -122,6 +122,7 @@
         <button class="WButton" onclick="allR()">全部紅色</button>
         <button class="WButton" onclick="allG()">全部綠色</button>
         <button class="WButton" onclick="allB()">全部藍色</button>
+        <button class="WButton" onclick="allBToW()">灰階處理</button>
     </div>
     <script>
         const cvs = document.querySelector('#img_canvas');
@@ -200,16 +201,14 @@
             }
             ctx.putImageData(pixis, 0, 0);
         }
-        function deleteBackground(){
+        function allBToW(){
             pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
             data = pixis.data;
             for(i = 0; i < data.length; i += 4){
-                if (data[i] == 0){
-                    data[i] = 0;
-                    data[i+1] = 0;
-                    data[i+2] = 0;
-                    data[i+3] = 0;
-                }
+                data[i] = (data[i]+data[i+1]+data[i+2])/3;
+                data[i+1] = (data[i]+data[i+1]+data[i+2])/3;
+                data[i+2] = (data[i]+data[i+1]+data[i+2])/3;
+
             }
             ctx.putImageData(pixis, 0, 0);
         }
