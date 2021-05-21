@@ -205,10 +205,10 @@
             pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
             data = pixis.data;
             for(i = 0; i < data.length; i += 4){
-                data[i] = (data[i]+data[i+1]+data[i+2])/3;
-                data[i+1] = (data[i]+data[i+1]+data[i+2])/3;
-                data[i+2] = (data[i]+data[i+1]+data[i+2])/3;
-
+                rgbE = (data[i]+data[i+1]+data[i+2])/3;
+                data[i] = rgbE;
+                data[i+1] = rgbE;
+                data[i+2] = rgbE;
             }
             ctx.putImageData(pixis, 0, 0);
         }
