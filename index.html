@@ -128,6 +128,10 @@
         <button class="WButton" onclick="turnLight2()">圖片調亮2</button>
         <button class="WButton" onclick="turnDark()">圖片調暗</button>
         <button class="WButton" onclick="turnDark2()">圖片調暗2</button>
+        <button class="WButton" onclick="AphaP()">透明度增</button>
+        <button class="WButton" onclick="AphaP2()">透明度增2</button>
+        <button class="WButton" onclick="AphaM()">透明度減</button>
+        <button class="WButton" onclick="AphaM2()">透明度減2</button>
     </div>
     <script>
         const cvs = document.querySelector('#img_canvas');
@@ -265,6 +269,38 @@
                 data[i] = rgbE;
                 data[i+1] = rgbE;
                 data[i+2] = rgbE;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function AphaP(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i+3] = data[i+3]+10;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function AphaM(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i+3] = data[i+3]-10;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function AphaP2(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i+3] = data[i+3]*1.1;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function AphaM2(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                data[i+3] = data[i+3]/1.1;
             }
             ctx.putImageData(pixis, 0, 0);
         }
