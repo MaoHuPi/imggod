@@ -138,6 +138,7 @@
         <button class="WButton" onclick="OB()">外圈染黑</button>
     </div>
     <script>
+        const iM = 3;
         const cvs = document.querySelector('#img_canvas');
         const ctx = cvs.getContext('2d');
         const cvs2 = document.querySelector('#img_canvas2');
@@ -317,24 +318,24 @@
                 var iBL = Math.pow(Math.pow(cvs.height-(((i+3)/4)/cvs.width), 2)+Math.pow((((i+3)/4)%cvs.width), 2), 1/2);
                 var iBR = Math.pow(Math.pow(cvs.height-(((i+3)/4)/cvs.width), 2)+Math.pow(cvs.width-(((i+3)/4)%cvs.width), 2), 1/2);
                 if (iTL < iTR && iTL < iBL && iTL < iBR){
-                    data[i] += iTL/10;
-                    data[i+1] += iTL/10;
-                    data[i+2] += iTL/10;
+                    data[i] += iTL/iM;
+                    data[i+1] += iTL/iM;
+                    data[i+2] += iTL/iM;
                 }
                 else if (iTR < iTL && iTR < iBL && iTR < iBR){
-                    data[i] += iTR/10;
-                    data[i+1] += iTR/10;
-                    data[i+2] += iTR/10;
+                    data[i] += iTR/iM;
+                    data[i+1] += iTR/iM;
+                    data[i+2] += iTR/iM;
                 }
                 else if (iBL < iTL && iBL < iTR && iBL < iBR){
-                    data[i] += iBL/10;
-                    data[i+1] += iBL/10;
-                    data[i+2] += iBL/10;
+                    data[i] += iBL/iM;
+                    data[i+1] += iBL/iM;
+                    data[i+2] += iBL/iM;
                 }
                 else if (iBR < iTL && iBR < iBL && iBR < iTR){
-                    data[i] += iBR/10;
-                    data[i+1] += iBR/10;
-                    data[i+2] += iBR/10;
+                    data[i] += iBR/iM;
+                    data[i+1] += iBR/iM;
+                    data[i+2] += iBR/iM;
                 }
             }
             ctx.putImageData(pixis, 0, 0);
@@ -349,24 +350,24 @@
                 var iBL = Math.pow(Math.pow(cvs.height-(((i+3)/4)/cvs.width), 2)+Math.pow((((i+3)/4)%cvs.width), 2), 1/2);
                 var iBR = Math.pow(Math.pow(cvs.height-(((i+3)/4)/cvs.width), 2)+Math.pow(cvs.width-(((i+3)/4)%cvs.width), 2), 1/2);
                 if (iTL < iTR && iTL < iBL && iTL < iBR){
-                    data[i] += oTL-iTL/10;
-                    data[i+1] += oTL-iTL/10;
-                    data[i+2] += oTL-iTL/10;
+                    data[i] += (oTL-iTL)/iM;
+                    data[i+1] += (oTL-iTL)/iM;
+                    data[i+2] += (oTL-iTL)/iM;
                 }
                 else if (iTR < iTL && iTR < iBL && iTR < iBR){
-                    data[i] += oTL-iTR/10;
-                    data[i+1] += oTL-iTR/10;
-                    data[i+2] += oTL-iTR/10;
+                    data[i] += (oTL-iTR)/iM;
+                    data[i+1] += (oTL-iTR)/iM;
+                    data[i+2] += (oTL-iTR)/iM;
                 }
                 else if (iBL < iTL && iBL < iTR && iBL < iBR){
-                    data[i] += oTL-iBL/10;
-                    data[i+1] += oTL-iBL/10;
-                    data[i+2] += oTL-iBL/10;
+                    data[i] += (oTL-iBL)/iM;
+                    data[i+1] += (oTL-iBL)/iM;
+                    data[i+2] += (oTL-iBL)/iM;
                 }
                 else if (iBR < iTL && iBR < iBL && iBR < iTR){
-                    data[i] += oTL-iBR/10;
-                    data[i+1] += oTL-iBR/10;
-                    data[i+2] += oTL-iBR/10;
+                    data[i] += (oTL-iBR)/iM;
+                    data[i+1] += (oTL-iBR)/iM;
+                    data[i+2] += (oTL-iBR)/iM;
                 }
             }
             ctx.putImageData(pixis, 0, 0);
@@ -380,24 +381,24 @@
                 var iBL = Math.pow(Math.pow(cvs.height-(((i+3)/4)/cvs.width), 2)+Math.pow((((i+3)/4)%cvs.width), 2), 1/2);
                 var iBR = Math.pow(Math.pow(cvs.height-(((i+3)/4)/cvs.width), 2)+Math.pow(cvs.width-(((i+3)/4)%cvs.width), 2), 1/2);
                 if (iTL < iTR && iTL < iBL && iTL < iBR){
-                    data[i] -= iTL/10;
-                    data[i+1] -= iTL/10;
-                    data[i+2] -= iTL/10;
+                    data[i] -= iTL/iM;
+                    data[i+1] -= iTL/iM;
+                    data[i+2] -= iTL/iM;
                 }
                 else if (iTR < iTL && iTR < iBL && iTR < iBR){
-                    data[i] -= iTR/10;
-                    data[i+1] -= iTR/10;
-                    data[i+2] -= iTR/10;
+                    data[i] -= iTR/iM;
+                    data[i+1] -= iTR/iM;
+                    data[i+2] -= iTR/iM;
                 }
                 else if (iBL < iTL && iBL < iTR && iBL < iBR){
-                    data[i] -= iBL/10;
-                    data[i+1] -= iBL/10;
-                    data[i+2] -= iBL/10;
+                    data[i] -= iBL/iM;
+                    data[i+1] -= iBL/iM;
+                    data[i+2] -= iBL/iM;
                 }
                 else if (iBR < iTL && iBR < iBL && iBR < iTR){
-                    data[i] -= iBR/10;
-                    data[i+1] -= iBR/10;
-                    data[i+2] -= iBR/10;
+                    data[i] -= iBR/iM;
+                    data[i+1] -= iBR/iM;
+                    data[i+2] -= iBR/iM;
                 }
             }
             ctx.putImageData(pixis, 0, 0);
@@ -412,24 +413,24 @@
                 var iBL = Math.pow(Math.pow(cvs.height-(((i+3)/4)/cvs.width), 2)+Math.pow((((i+3)/4)%cvs.width), 2), 1/2);
                 var iBR = Math.pow(Math.pow(cvs.height-(((i+3)/4)/cvs.width), 2)+Math.pow(cvs.width-(((i+3)/4)%cvs.width), 2), 1/2);
                 if (iTL < iTR && iTL < iBL && iTL < iBR){
-                    data[i] -= oTL-iTL;
-                    data[i+1] -= oTL-iTL;
-                    data[i+2] -= oTL-iTL;
+                    data[i] -= (oTL-iTL)/iM;
+                    data[i+1] -= (oTL-iTL)/iM;
+                    data[i+2] -= (oTL-iTL)/iM;
                 }
                 else if (iTR < iTL && iTR < iBL && iTR < iBR){
-                    data[i] -= oTL-iTR;
-                    data[i+1] -= oTL-iTR;
-                    data[i+2] -= oTL-iTR;
+                    data[i] -= (oTL-iTR)/iM;
+                    data[i+1] -= (oTL-iTR)/iM;
+                    data[i+2] -= (oTL-iTR)/iM;
                 }
                 else if (iBL < iTL && iBL < iTR && iBL < iBR){
-                    data[i] -= oTL-iBL;
-                    data[i+1] -= oTL-iBL;
-                    data[i+2] -= oTL-iBL;
+                    data[i] -= (oTL-iBL)/iM;
+                    data[i+1] -= (oTL-iBL)/iM;
+                    data[i+2] -= (oTL-iBL)/iM;
                 }
                 else if (iBR < iTL && iBR < iBL && iBR < iTR){
-                    data[i] -= oTL-iBR;
-                    data[i+1] -= oTL-iBR;
-                    data[i+2] -= oTL-iBR;
+                    data[i] -= (oTL-iBR)/iM;
+                    data[i+1] -= (oTL-iBR)/iM;
+                    data[i+2] -= (oTL-iBR)/iM;
                 }
             }
             ctx.putImageData(pixis, 0, 0);
