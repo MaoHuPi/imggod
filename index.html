@@ -123,6 +123,8 @@
         <button class="WButton" onclick="allG()">全部綠色</button>
         <button class="WButton" onclick="allB()">全部藍色</button>
         <button class="WButton" onclick="allBToW()">灰階處理</button>
+        <button class="WButton" onclick="allBToW2()">灰階處理2</button>
+
     </div>
     <script>
         const cvs = document.querySelector('#img_canvas');
@@ -206,6 +208,17 @@
             data = pixis.data;
             for(i = 0; i < data.length; i += 4){
                 rgbE = (data[i]+data[i+1]+data[i+2])/3;
+                data[i] = rgbE;
+                data[i+1] = rgbE;
+                data[i+2] = rgbE;
+            }
+            ctx.putImageData(pixis, 0, 0);
+        }
+        function allBToW2(){
+            pixis = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            data = pixis.data;
+            for(i = 0; i < data.length; i += 4){
+                rgbE = Math.pow((data[i]*data[i+1]*data[i+2]), 1/3);
                 data[i] = rgbE;
                 data[i+1] = rgbE;
                 data[i+2] = rgbE;
