@@ -138,6 +138,7 @@
         <button class="WButton" onclick="OB()">四角染黑</button>
     </div>
     <script>
+        document.body.oncontextmenu = () => {self.event.returnValue=false};
         const iM = 3;
         const cvs = document.querySelector('#img_canvas');
         const ctx = cvs.getContext('2d');
