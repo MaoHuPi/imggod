@@ -511,14 +511,14 @@
                 }
             }
         }
-        function reWatermark(){
+        function reWatermark(h = 200){
             $a = ctx.getImageData(0, 0, cvs.width, cvs.height);
             $b = $a.data;
             for(let i = 0; i < $b.length; i+=4){
                 if(
-                    $b[i] > 200 && 
-                    $b[i+1] > 200 && 
-                    $b[i+2] > 200
+                    $b[i] > h && 
+                    $b[i+1] > h && 
+                    $b[i+2] > h
                 ){
                     $b[i] = 255;
                     $b[i+1] = 255;
