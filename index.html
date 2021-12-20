@@ -136,6 +136,7 @@
         <button class="WButton" onclick="oB()">十字染黑</button>
         <button class="WButton" onclick="OW()">四角漂白</button>
         <button class="WButton" onclick="OB()">四角染黑</button>
+        <button class="WButton" onclick="reWatermark()">移除水印</button>
     </div>
     <script>
         document.body.oncontextmenu = () => {self.event.returnValue=false};
@@ -509,6 +510,23 @@
                     DCFIlink.click();
                 }
             }
+        }
+        function reWatermark(){
+            $a = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            $b = $a.data;
+            for(let i = 0; i < $b.length; i+=4){
+                if(
+                    $b[i] > 200 && 
+                    $b[i+1] > 200 && 
+                    $b[i+2] > 200
+                ){
+                    $b[i] = 255;
+                    $b[i+1] = 255;
+                    $b[i+2] = 255;
+                    $b[i+3] = 255;
+                }
+            }
+            ctx.putImageData($a, 0, 0);
         }
     </script>
 </body>
