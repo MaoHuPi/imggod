@@ -529,7 +529,8 @@
             }
             ctx.putImageData($a, 0, 0);
         }
-        function reWotB(h = 200){$a = ctx.getImageData(0, 0, cvs.width, cvs.height);
+        function reWotB(h = 200){
+            $a = ctx.getImageData(0, 0, cvs.width, cvs.height);
             $b = $a.data;
             for(let i = 0; i < $b.length; i+=4){
                 if(
