@@ -139,6 +139,11 @@
         <button class="WButton" onclick="OB()">四角染黑</button>
         <button class="WButton" onclick="reWatermark()">移除水印</button>
         <button class="WButton" onclick="reWotB()">文本去背</button>
+        <button class="WButton" onclick="fade()">淡化黑色</button>
+        <button class="WButton" onclick="fade([255, 255, 255])">淡化白色</button>
+        <button class="WButton" onclick="fade([255, 0, 0])">淡化紅色</button>
+        <button class="WButton" onclick="fade([0, 255, 0])">淡化綠色</button>
+        <button class="WButton" onclick="fade([0, 0, 255])">淡化藍色</button>
     </div>
     <script>
         document.body.oncontextmenu = () => {self.event.returnValue=false};
@@ -550,6 +555,14 @@
             }
             ctx.putImageData($a, 0, 0);
          }
+        function fade(cData = [0, 0, 0]){
+            $a = ctx.getImageData(0, 0, cvs.width, cvs.height);
+            $b = $a.data;
+            for(let i = 0; i < $b.length; i+=4){
+                $b[i+3] -= 255 - (Math.abs($b[i]-cData[0]) + Math.abs($b[i+1]-cData[1]) + Math.abs($b[i+2]-cData[2]))/3;
+            }
+            ctx.putImageData($a, 0, 0);
+        }
     </script>
 </body>
 </html>
